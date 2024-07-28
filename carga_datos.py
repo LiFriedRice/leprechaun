@@ -5,7 +5,7 @@ import streamlit as st
 
 def generate_plots(df, start_row, end_row):
     df_filtered = df.iloc[start_row:end_row + 1]
-    
+
     # Años y géneros únicos
     x_years = df_filtered['Year_of_Release'].unique()
     x_Genre = df_filtered['Genre'].unique()
@@ -20,6 +20,7 @@ def generate_plots(df, start_row, end_row):
 
     # Crear gráficos
     fig, axs = plt.subplots(2, 2, figsize=(14, 14))
+    fig.tight_layout(pad=5.0)
 
     # Gráfico de barras por año
     df_sorted_years = df_filtered.groupby('Year_of_Release').sum().reindex(x_years).fillna(0)
@@ -32,7 +33,7 @@ def generate_plots(df, start_row, end_row):
     axs[0, 0].set_xlabel('Año')
     axs[0, 0].set_ylabel('Ventas')
     axs[0, 0].set_xticks(x_years_indices)
-    axs[0, 0].set_xticklabels(x_years)
+    axs[0, 0].set_xticklabels(x_years, rotation=90)
     axs[0, 0].legend()
 
     # Gráfico de líneas por año
@@ -44,7 +45,7 @@ def generate_plots(df, start_row, end_row):
     axs[0, 1].set_xlabel('Año')
     axs[0, 1].set_ylabel('Ventas')
     axs[0, 1].set_xticks(x_years_indices)
-    axs[0, 1].set_xticklabels(x_years)
+    axs[0, 1].set_xticklabels(x_years, rotation=90)
     axs[0, 1].legend()
 
     # Gráfico de barras por género
